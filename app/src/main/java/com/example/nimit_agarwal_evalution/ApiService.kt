@@ -11,7 +11,7 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("/search")
-    fun  getUSer(@Query("post") postId:String): Call<ResponseDTO>
+    fun  getUSer(@Query("post") postId:Int): Call<ResponseDTO>
 
 
 }
