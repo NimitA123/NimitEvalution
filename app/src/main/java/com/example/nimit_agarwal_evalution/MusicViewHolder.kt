@@ -13,7 +13,7 @@ class MusicViewHolder(private  val view: View): RecyclerView.ViewHolder(view) {
 
     fun setData(resultsDTO: ResultsDTO) {
 
-        Glide.with(view.imageView).load(resultsDTO.artistViewUrl).into(view.imageView)
+        Glide.with(view.imageView).load(resultsDTO.wrapperType).into(view.imageView)
         view.textView.text = resultsDTO.trackName.toString() //.text means setText
         view.textView2.text = resultsDTO.artistName.toString()
         view.button3.setOnClickListener {
