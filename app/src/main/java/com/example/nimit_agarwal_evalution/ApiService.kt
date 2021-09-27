@@ -10,8 +10,8 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("/search")
-    fun  getUSer(@Query("post") postId:Int): Call<ResponseDTO>
+    @GET("/search?term=[from search view]")
+    fun  getUSer(@Query("post") postId:String): Call<ResponseDTO>
 
 
 }

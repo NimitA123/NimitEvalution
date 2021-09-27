@@ -2,6 +2,7 @@ package com.example.nimit_agarwal_evalution
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Response
@@ -18,7 +19,8 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
        button.setOnClickListener {
            var apiService = Network.getRetrofitInstance().create(ApiService::class.java)
-           apiService.getUSer(1).enqueue(object : retrofit2.Callback<ResponseDTO>{
+           val name = SearchView.text.toString()
+           apiService.getUSer(name).enqueue(object : retrofit2.Callback<ResponseDTO>{
                override fun onResponse(call: Call<ResponseDTO>, response: Response<ResponseDTO>) {
                    response.body()!!.also {
                        arrayList= it.results as ArrayList<ResultsDTO>
@@ -37,6 +39,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun SetRecycleView() {
      val musicAdapter= MusicAdapter(arrayList)
+     val linearLayout = LinearLayoutManager(this)
+       RecyclerView.adapter = musicAdapter
+        RecyclerView.layoutManager = linearLayout
     }
 
 
