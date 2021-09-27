@@ -3,10 +3,9 @@ package com.example.nimit_agarwal_evalution
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.item_layout.view.*
 import retrofit2.Call
 import retrofit2.Response
-import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     private var arrayList = arrayListOf<ResultsDTO>();
@@ -21,7 +20,11 @@ class MainActivity : AppCompatActivity() {
            var apiService = Network.getRetrofitInstance().create(ApiService::class.java)
            apiService.getUSer(1).enqueue(object : retrofit2.Callback<ResponseDTO>{
                override fun onResponse(call: Call<ResponseDTO>, response: Response<ResponseDTO>) {
-                  arrayList.addAll(response.body()?.results)
+                   response.body()!!.also {
+                       arrayList= it.results as ArrayList<ResultsDTO>
+                       SetRecycleView()
+
+                   }
                }
 
                override fun onFailure(call: Call<ResponseDTO>, t: Throwable) {
@@ -32,8 +35,14 @@ class MainActivity : AppCompatActivity() {
        }
     }
 
+    private fun SetRecycleView() {
+     val musicAdapter= MusicAdapter(arrayList)
+    }
+
 
 }
+
+
 
 
 
